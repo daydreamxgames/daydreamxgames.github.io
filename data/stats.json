@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-17T13:34:21Z",
+  "updatedAt": "2026-11-17T13:36:20Z",
   "games": {
     "8585667092": {
       "visits": 1378559,
       "favorites": 4885,
-      "playing": 0,
+      "playing": 2,
       "upVotes": 2748,
       "downVotes": 682
     },
@@ -51,9 +51,9 @@
       "downVotes": 1
     },
     "10774546125": {
-      "visits": 13556,
+      "visits": 13560,
       "favorites": 287,
-      "playing": 21,
+      "playing": 26,
       "upVotes": 23,
       "downVotes": 9
     },
@@ -74,7 +74,7 @@
     "10773640095": {
       "visits": 3242,
       "favorites": 23,
-      "playing": 1,
+      "playing": 2,
       "upVotes": 7,
       "downVotes": 7
     },
