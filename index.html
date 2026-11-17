@@ -669,11 +669,11 @@ async function loadStats(){
       if(f) f.textContent=fmt(g.f);
       const peak = pk && pk[g.u] && pk[g.u].peak;
       const pe=$(`[data-peak="${g.u}"]`);
-      if(pe && peak){ pe.querySelector('span').textContent=fmt(peak); pe.hidden=false; }
+      if(pe && peak){ pe.querySelector('span').textContent=typeof peak==='number'?fmt(peak):peak; pe.hidden=false; }
       if(g.u===8585667092){
         $('#kpiVisits').textContent=fmt(g.v); $('#kpiFavs').textContent=fmt(g.f);
         if(s && s.upVotes+s.downVotes>0) $('#kpiRate').textContent=Math.round(100*s.upVotes/(s.upVotes+s.downVotes))+'%';
-        if(peak){ $('#kpiPeak').textContent=fmt(peak); $('#kpiPeakBox').hidden=false; $('#kpiRate').parentElement.hidden=true; }
+        if(peak){ $('#kpiPeak').textContent=typeof peak==='number'?fmt(peak):peak; $('#kpiPeakBox').hidden=false; $('#kpiRate').parentElement.hidden=true; }
       }
     }
     const hv=$('[data-count][data-suffix="M+"]'), hf=$('[data-count][data-suffix="K+"]');
