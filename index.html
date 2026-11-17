@@ -177,11 +177,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .game .info{display:flex;gap:14px;align-items:center;padding:0 18px 18px;margin-top:-34px;position:relative;z-index:1}
 .game .icon{width:64px;height:64px;border-radius:16px;flex:none;border:2px solid #0f0f19;box-shadow:0 8px 20px rgba(0,0,0,.5);object-fit:cover}
 .game h3{font-size:17px;font-weight:800;line-height:1.25;letter-spacing:-.01em}
-.game .sub{display:flex;gap:14px;font-size:13px;color:var(--muted);font-weight:600;margin-top:4px}
+.game .sub{display:flex;flex-wrap:wrap;column-gap:14px;row-gap:2px;font-size:13px;color:var(--muted);font-weight:600;margin-top:4px}
 .game .sub svg{width:13px;height:13px;vertical-align:-2px;margin-right:4px;opacity:.8}
 .game .play{position:absolute;right:16px;top:16px;z-index:2;width:42px;height:42px;border-radius:50%;background:#fff;color:#0a0a12;display:grid;place-items:center;transform:scale(.6);opacity:0;transition:all .35s cubic-bezier(.2,.8,.2,1)}
 .game:hover .play,.game:focus-visible .play{transform:none;opacity:1}
 .game .play svg{width:16px;height:16px;margin-left:2px}
+.game .pk{color:#ffd28a}
 .note{color:var(--dim);font-size:13px;margin-top:22px}
 
 /* ---------- process ---------- */
@@ -321,6 +322,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;position:relative;ov
     <symbol id="arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></symbol>
     <symbol id="eye" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="bolt" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 2 4 14h7l-1.5 8L20 10h-7l.5-8z"/></symbol>
     <symbol id="heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.5-4.6-10-9.2C.3 8.4 2.4 4 6.5 4c2.3 0 3.9 1.3 5.5 3.2C13.6 5.3 15.2 4 17.5 4 21.6 4 23.7 8.4 22 11.8 19.5 16.4 12 21 12 21z"/></symbol>
     <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".16"/><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M7.5 12.5l3 3 6-6.5"/></symbol>
     <symbol id="discord" viewBox="0 0 24 24"><path fill="currentColor" d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.5 19.5 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18.1A19.8 19.8 0 0 0 6.1 21l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14 14 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.7 19.7 0 0 0 6-2.9c.5-5.2-.8-9.7-3.6-13.7zM8 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></symbol>
@@ -450,9 +452,9 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;position:relative;ov
         <h3 class="display" style="margin-top:12px">A Monorail Ride</h3>
         <p>Hop on, ride the track and make it all the way to the finish. Three major updates in, it's our most-played game and still growing.</p>
         <div class="kpis">
-          <div class="kpi"><b>1.37M</b><span>Visits</span></div>
-          <div class="kpi"><b>80%</b><span>Like ratio</span></div>
-          <div class="kpi"><b>4.8K</b><span>Favorites</span></div>
+          <div class="kpi"><b id="kpiVisits">1.37M</b><span>Visits</span></div>
+          <div class="kpi"><b id="kpiPeak">500</b><span>Peak CCU</span></div>
+          <div class="kpi"><b id="kpiFavs">4.8K</b><span>Favorites</span></div>
         </div>
         <div><a class="btn btn-primary" href="https://www.roblox.com/games/84994213239994/A-Monorail-Ride" target="_blank" rel="noopener">Play on Roblox <svg class="arr" width="16" height="16"><use href="#arrow"/></svg></a></div>
       </div>
@@ -462,7 +464,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;position:relative;ov
       <div class="filters" id="filters" role="tablist" aria-label="Filter games"></div>
     </div>
     <div class="games" id="gameGrid"></div>
-    <p class="note">Visit counts from Roblox, November 2026.</p>
+    <p class="note" id="statsNote">Stats from Roblox, updated every week. Peak CCU is each game's all-time high.</p>
   </div>
 </section>
 
@@ -644,9 +646,43 @@ grid.innerHTML = GAMES.map(g=>`
     <span class="play"><svg><use href="#play"/></svg></span>
     <div class="info">
       <img class="icon" src="assets/games/${g.u}-icon.webp" alt="" loading="lazy">
-      <div><h3>${g.n}</h3><div class="sub"><span><svg><use href="#eye"/></svg>${fmt(g.v)} visits</span><span><svg><use href="#heart"/></svg>${fmt(g.f)}</span></div></div>
+      <div><h3>${g.n}</h3><div class="sub"><span><svg><use href="#eye"/></svg><span data-visits="${g.u}">${fmt(g.v)}</span> visits</span><span><svg><use href="#heart"/></svg><span data-favs="${g.u}">${fmt(g.f)}</span></span><span class="pk" data-peak="${g.u}" hidden><svg><use href="#bolt"/></svg><span></span> peak CCU</span></div></div>
     </div>
   </a>`).join('');
+
+/* ----- live stats: data/stats.json is refreshed weekly by GitHub Actions; data/peaks.json is edited by hand ----- */
+async function loadStats(){
+  try{
+    const [st, pk] = await Promise.all([
+      fetch('data/stats.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null),
+      fetch('data/peaks.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null)
+    ]);
+    let visits=0, favs=0;
+    for(const g of GAMES){
+      const s = st && st.games && st.games[g.u];
+      if(s){ g.v=s.visits; g.f=s.favorites; }
+      visits+=g.v; favs+=g.f;
+      const v=$(`[data-visits="${g.u}"]`), f=$(`[data-favs="${g.u}"]`);
+      if(v) v.textContent=fmt(g.v);
+      if(f) f.textContent=fmt(g.f);
+      const peak = pk && pk[g.u] && pk[g.u].peak;
+      const pe=$(`[data-peak="${g.u}"]`);
+      if(pe && peak){ pe.querySelector('span').textContent=fmt(peak); pe.hidden=false; }
+      if(g.u===8585667092){
+        $('#kpiVisits').textContent=fmt(g.v); $('#kpiFavs').textContent=fmt(g.f);
+        if(peak) $('#kpiPeak').textContent=fmt(peak);
+      }
+    }
+    const hv=$('[data-count][data-suffix="M+"]'), hf=$('[data-count][data-suffix="K+"]');
+    if(hv) hv.dataset.count=(Math.floor(visits/1e5)/10).toFixed(1);
+    if(hf) hf.dataset.count=(Math.floor(favs/100)/10).toFixed(1);
+    if(st && st.updatedAt){
+      const d=new Date(st.updatedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+      $('#statsNote').textContent=`Stats from Roblox, updated weekly (last update ${d}). Peak CCU is each game's all-time high.`;
+    }
+  }catch(e){ /* keep the built-in numbers */ }
+}
+const statsReady = loadStats();
 
 const genres = ['All', ...new Set(GAMES.map(g=>g.g))];
 const filters = $('#filters');
@@ -717,7 +753,7 @@ function count(el){
     if(k<1) requestAnimationFrame(tick);
   })(t0);
 }
-setTimeout(()=>$$('[data-count]').forEach(count),500);
+Promise.race([statsReady, new Promise(r=>setTimeout(r,1200))]).then(()=>setTimeout(()=>$$('[data-count]').forEach(count),200));
 
 /* ----- nav ----- */
 const nav=$('#nav'), menuBtn=$('#menuBtn');
