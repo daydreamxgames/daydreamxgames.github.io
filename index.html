@@ -653,6 +653,7 @@ grid.innerHTML = GAMES.map(g=>`
   </a>`).join('');
 
 /* ----- live stats: data/stats.json is refreshed weekly by GitHub Actions; data/peaks.json is edited by hand ----- */
+const MIN_PEAK = 50; // peak CCU below this is not shown
 async function loadStats(){
   try{
     const [st, pk] = await Promise.all([
@@ -667,7 +668,8 @@ async function loadStats(){
       const v=$(`[data-visits="${g.u}"]`), f=$(`[data-favs="${g.u}"]`);
       if(v) v.textContent=fmt(g.v);
       if(f) f.textContent=fmt(g.f);
-      const peak = pk && pk[g.u] && pk[g.u].peak;
+      const rawPeak = pk && pk[g.u] && pk[g.u].peak;
+      const peak = rawPeak && parseInt(rawPeak,10) >= MIN_PEAK ? rawPeak : null; // small peaks stay hidden
       const pe=$(`[data-peak="${g.u}"]`);
       if(pe && peak){ pe.querySelector('span').textContent=typeof peak==='number'?fmt(peak):peak; pe.hidden=false; }
       if(g.u===8585667092){
