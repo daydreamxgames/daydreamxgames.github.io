@@ -182,7 +182,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .game .play{position:absolute;right:16px;top:16px;z-index:2;width:42px;height:42px;border-radius:50%;background:#fff;color:#0a0a12;display:grid;place-items:center;transform:scale(.6);opacity:0;transition:all .35s cubic-bezier(.2,.8,.2,1)}
 .game:hover .play,.game:focus-visible .play{transform:none;opacity:1}
 .game .play svg{width:16px;height:16px;margin-left:2px}
-.game .pk{color:#ffd28a}
+.game .pk{color:#5ef2a0}
+#kpiPeak{color:#5ef2a0}
 .note{color:var(--dim);font-size:13px;margin-top:22px}
 
 /* ---------- process ---------- */
@@ -453,7 +454,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;position:relative;ov
         <p>Hop on, ride the track and make it all the way to the finish. Three major updates in, it's our most-played game and still growing.</p>
         <div class="kpis">
           <div class="kpi"><b id="kpiVisits">1.37M</b><span>Visits</span></div>
-          <div class="kpi"><b id="kpiPeak">500</b><span>Peak CCU</span></div>
+          <div class="kpi"><b id="kpiRate">80%</b><span>Like ratio</span></div>
+          <div class="kpi" id="kpiPeakBox" hidden><b id="kpiPeak"></b><span>Peak CCU</span></div>
           <div class="kpi"><b id="kpiFavs">4.8K</b><span>Favorites</span></div>
         </div>
         <div><a class="btn btn-primary" href="https://www.roblox.com/games/84994213239994/A-Monorail-Ride" target="_blank" rel="noopener">Play on Roblox <svg class="arr" width="16" height="16"><use href="#arrow"/></svg></a></div>
@@ -670,7 +672,8 @@ async function loadStats(){
       if(pe && peak){ pe.querySelector('span').textContent=fmt(peak); pe.hidden=false; }
       if(g.u===8585667092){
         $('#kpiVisits').textContent=fmt(g.v); $('#kpiFavs').textContent=fmt(g.f);
-        if(peak) $('#kpiPeak').textContent=fmt(peak);
+        if(s && s.upVotes+s.downVotes>0) $('#kpiRate').textContent=Math.round(100*s.upVotes/(s.upVotes+s.downVotes))+'%';
+        if(peak){ $('#kpiPeak').textContent=fmt(peak); $('#kpiPeakBox').hidden=false; $('#kpiRate').parentElement.hidden=true; }
       }
     }
     const hv=$('[data-count][data-suffix="M+"]'), hf=$('[data-count][data-suffix="K+"]');
