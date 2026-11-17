@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-17T13:36:20Z",
+  "updatedAt": "2026-11-17T16:44:33Z",
   "games": {
     "8585667092": {
-      "visits": 1378559,
+      "visits": 1378619,
       "favorites": 4885,
-      "playing": 2,
+      "playing": 1,
       "upVotes": 2748,
       "downVotes": 682
     },
@@ -16,7 +16,7 @@
       "downVotes": 55
     },
     "10319306193": {
-      "visits": 142321,
+      "visits": 142338,
       "favorites": 416,
       "playing": 0,
       "upVotes": 73,
@@ -30,7 +30,7 @@
       "downVotes": 1
     },
     "10770538710": {
-      "visits": 26277,
+      "visits": 26279,
       "favorites": 70,
       "playing": 0,
       "upVotes": 11,
@@ -51,10 +51,10 @@
       "downVotes": 1
     },
     "10774546125": {
-      "visits": 13560,
-      "favorites": 287,
-      "playing": 26,
-      "upVotes": 23,
+      "visits": 14004,
+      "favorites": 298,
+      "playing": 38,
+      "upVotes": 25,
       "downVotes": 9
     },
     "9378596381": {
@@ -72,9 +72,9 @@
       "downVotes": 3
     },
     "10773640095": {
-      "visits": 3242,
+      "visits": 3255,
       "favorites": 23,
-      "playing": 2,
+      "playing": 1,
       "upVotes": 7,
       "downVotes": 7
     },

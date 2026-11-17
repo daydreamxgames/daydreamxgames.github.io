@@ -3,8 +3,8 @@
 Runs weekly in GitHub Actions (.github/workflows/update-stats.yml). Uses only the
 Python standard library and Roblox's public, no-login APIs.
 
-Peak CCU (all-time high) is NOT available from Roblox's public API, so it is kept
-by hand in data/peaks.json. This script never touches that file.
+The list of games lives in data/games.json (universe ID -> name). Add a game there
+and it is picked up on the next run.
 """
 import json
 import time
@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PEAKS = ROOT / "data" / "peaks.json"
+GAMES = ROOT / "data" / "games.json"
 OUT = ROOT / "data" / "stats.json"
 
 
@@ -30,14 +30,14 @@ def get(url):
 
 
 def main():
-    peaks = json.loads(PEAKS.read_text(encoding="utf-8"))
-    ids = ",".join(peaks.keys())
+    wanted = json.loads(GAMES.read_text(encoding="utf-8"))
+    ids = ",".join(wanted.keys())
 
     games = {g["id"]: g for g in get(f"https://games.roblox.com/v1/games?universeIds={ids}")["data"]}
     votes = {v["id"]: v for v in get(f"https://games.roblox.com/v1/games/votes?universeIds={ids}")["data"]}
 
     out = {"updatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "games": {}}
-    for uid in peaks:
+    for uid in wanted:
         g = games.get(int(uid))
         if not g:
             continue
@@ -50,7 +50,7 @@ def main():
             "downVotes": v.get("downVotes", 0),
         }
 
-    if len(out["games"]) < len(peaks) // 2:
+    if len(out["games"]) < len(wanted) // 2:
         raise SystemExit("Roblox returned too few games; keeping the old stats.json")
 
     OUT.write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")
