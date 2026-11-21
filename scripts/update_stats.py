@@ -43,11 +43,12 @@ def main():
             continue
         v = votes.get(int(uid), {})
         out["games"][uid] = {
-            "visits": g["visits"],
-            "favorites": g["favoritedCount"],
-            "playing": g["playing"],
-            "upVotes": v.get("upVotes", 0),
-            "downVotes": v.get("downVotes", 0),
+            # int(...) so only plain numbers from the API can ever reach the site
+            "visits": int(g["visits"]),
+            "favorites": int(g["favoritedCount"]),
+            "playing": int(g["playing"]),
+            "upVotes": int(v.get("upVotes", 0)),
+            "downVotes": int(v.get("downVotes", 0)),
         }
 
     if len(out["games"]) < len(wanted) // 2:
