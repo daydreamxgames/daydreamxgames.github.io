@@ -7,7 +7,9 @@
 <meta name="description" content="Tenfold is an independent Roblox development studio. We design, build and run games played by millions — simulators, obbies, horror, tower defense and more.">
 <meta property="og:title" content="Tenfold — Roblox Game Studio">
 <meta property="og:description" content="We design, build and run Roblox games played by millions.">
-<meta property="og:image" content="assets/games/8585667092-thumb.webp">
+<meta property="og:image" content="https://tenfoldstudio.win/assets/og.png">
+<meta property="og:url" content="https://tenfoldstudio.win/">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#06060b">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,8 +79,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav-inner{max-width:1080px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 10px 0 22px;border-radius:999px;background:rgba(14,14,24,.62);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);transition:background .3s,border-color .3s}
 .nav.scrolled .nav-inner{background:rgba(10,10,18,.85);border-color:var(--line-2)}
 .brand img{height:30px;width:auto}
-.wordmark{font-family:var(--display);font-weight:900;font-stretch:100%;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:#fff;line-height:1}
-.wordmark-lg{font-size:32px;display:block}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .brand-mark{height:30px;width:auto}
+.brand .brand-word{height:15px;width:auto}
 .nav-links{display:flex;gap:4px}
 .nav-links a{padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;color:var(--muted);transition:color .2s,background .2s}
 .nav-links a:hover{color:var(--text);background:var(--surface-2)}
@@ -253,6 +256,7 @@ form .btn{justify-content:center;margin-top:6px}
 footer{border-top:1px solid var(--line);padding:70px 0 40px;position:relative;overflow:hidden}
 .foot{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
 .foot img{height:44px;width:auto}
+.foot .foot-logo{height:96px}
 .foot p{color:var(--muted);font-size:14px;margin-top:16px;max-width:300px}
 .foot h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
 .foot ul{list-style:none;display:grid;gap:10px}
@@ -338,7 +342,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;position:relative;ov
 <!-- ================= NAV ================= -->
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#top" class="brand" aria-label="Tenfold home"><span class="wordmark">Tenfold</span></a>
+    <a href="#top" class="brand" aria-label="Tenfold home"><img class="brand-mark" src="assets/logo-mark.png" alt=""><img class="brand-word" src="assets/logo-word.png" alt="Tenfold"></a>
     <nav class="nav-links" aria-label="Main">
       <a href="#games">Games</a>
       <a href="#services">Studio</a>
@@ -592,7 +596,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;position:relative;ov
   <div class="wrap">
     <div class="foot">
       <div>
-        <span class="wordmark wordmark-lg">Tenfold</span>
+        <img class="foot-logo" src="assets/logo-tenfold.png" alt="Tenfold">
         <p>An independent Roblox game studio building games that grow.</p>
       </div>
       <div>
