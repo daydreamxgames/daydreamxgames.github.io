@@ -1,4 +1,4 @@
-"""Fetch public Roblox stats for every Day Dream game and write data/stats.json.
+"""Fetch public Roblox stats for every Tenfold game and write data/stats.json.
 
 Runs weekly in GitHub Actions (.github/workflows/update-stats.yml). Uses only the
 Python standard library and Roblox's public, no-login APIs.
@@ -18,7 +18,7 @@ OUT = ROOT / "data" / "stats.json"
 
 
 def get(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "daydream-site-stats/1.0", "Accept": "application/json"})
+    req = urllib.request.Request(url, headers={"User-Agent": "tenfold-site-stats/1.0", "Accept": "application/json"})
     for attempt in range(4):
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
